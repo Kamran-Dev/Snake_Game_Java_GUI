@@ -229,8 +229,10 @@ public class MainMenu {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        soundEffect01.play();
     }
+
+
+
 
 
 }

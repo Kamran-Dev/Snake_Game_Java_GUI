@@ -1,6 +1,8 @@
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -148,17 +150,39 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
-    // check Apple
+    // check Apple, whenever the apple has been eaten.
     public void checkApple()
     {
         if(((x[0]) == appleX) && ((y[0]) == appleY)) {
+
+            SoundEffect soundEffect02 = new SoundEffect();
+            try {
+                soundEffect02.setFile("Score001.wav");
+            } catch (UnsupportedAudioFileException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
             bodyPartsOfSnake++;
             applesEaten++;
             newApple();
             DELAY = DELAY - 50;
-            Toolkit.getDefaultToolkit().beep();
+
         }
     }
+
+    public void gameOverSound(){
+        SoundEffect soundEffect01 = new SoundEffect();
+        try {
+            soundEffect01.setFile("Gameover001.wav");
+        } catch (UnsupportedAudioFileException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     // check collisions
     public void checkCollisions()
@@ -167,27 +191,32 @@ public class GamePanel extends JPanel implements ActionListener {
         for(int i = bodyPartsOfSnake; i > 0; i--){
 
             if((x[0] == x[i]) && (y[0] == y[i])) {
+                gameOverSound();
                 running = false;
             }
         }
 
         // if head collides with the left border
         if(x[0] < 0) {
+            gameOverSound();
             running = false;
         }
 
         // if head collides with the right border
         if(x[0] > SCREEN_WIDTH-UNIT_SIZE) {
+            gameOverSound();
             running = false;
         }
 
         // if head collides with the top border
         if(y[0] < 0) {
+            gameOverSound();
             running = false;
         }
 
         // if head collides with the down border
         if(y[0] > SCREEN_HEIGHT-UNIT_SIZE) {
+            gameOverSound();
             running = false;
         }
 
@@ -212,9 +241,6 @@ public class GamePanel extends JPanel implements ActionListener {
         c.drawString("OVERALL SCORE: " + applesEaten, 170, 450);
 
         this.add(resetButton);
-
-
-
     }
 
 

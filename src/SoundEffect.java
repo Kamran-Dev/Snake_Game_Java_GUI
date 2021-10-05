@@ -12,16 +12,13 @@ public class SoundEffect {
             AudioInputStream sound = AudioSystem.getAudioInputStream(file);
             clip01 = AudioSystem.getClip();
             clip01.open(sound);
+            clip01.setFramePosition(0);
+            clip01.start();
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
     }
 
-    public void play(){
-        clip01.setFramePosition(0);
-        clip01.start();
-
-    }
 
 }
