@@ -2,12 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URI;
 
 public class About {
 
     private JFrame frame1;
     private JLabel textLabel;
-    private JButton button1;
+    private JButton backButton;
+    private JButton gitHubButton;
     private JPanel panel1;
     private JPanel panel2;
     private JPanel panel3;
@@ -28,7 +33,8 @@ public class About {
 
         frame1 = new JFrame();
         textLabel = new JLabel();
-        button1 = new JButton();
+        backButton = new JButton();
+        gitHubButton = new JButton();
 
         frame1.setSize(700, 650);
         //frame1.setLocation(xLoc,yLoc);
@@ -79,14 +85,14 @@ public class About {
 
 
         // back button goes to main menu
-        button1.setText("BACK");
-        button1.setFocusable(false);
-        button1.setSize(75,30);
-        button1.setLocation(300, 550);
-        frame1.add(button1);
+        backButton.setText("BACK");
+        backButton.setFocusable(false);
+        backButton.setSize(75,30);
+        backButton.setLocation(300, 550);
+        frame1.add(backButton);
 
         // action listener for back button
-        button1.addActionListener(new ActionListener() {
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame1.dispose();
@@ -98,12 +104,44 @@ public class About {
 
         // TEXT LABEL
         textLabel.setText("This game developed by Rashidov Kamran. Date: 01.09.2021");
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        textLabel.setVerticalAlignment(SwingConstants.CENTER);
         textLabel.setSize(400,50);
         textLabel.setOpaque(true);
         textLabel.setBackground(Color.white);
-        textLabel.setLocation(200,100);
+
+        textLabel.setLocation(150,100);
         textLabel.add(c);
         frame1.add(textLabel);
+
+
+
+        // go to my GitHub account
+        gitHubButton.setText("GitHub");
+        gitHubButton.setFocusable(false);
+        gitHubButton.setSize(75,30);
+        gitHubButton.setLocation(150, 550);
+        frame1.add(gitHubButton);
+
+        // action listener for back button
+        gitHubButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Desktop browser = Desktop.getDesktop();
+                try{
+                    browser.browse(new URI("https://github.com/Kamran-Dev"));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (URISyntaxException uriSyntaxException) {
+                    uriSyntaxException.printStackTrace();
+                }
+            }
+        });
+
+        // links:
+        // https://www.linkedin.com/in/kamranrashidov/
+        // https://www.instagram.com/electrologia/
 
 
 

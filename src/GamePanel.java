@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     Random random;
     JButton resetButton; // reset the game
+    JButton mainMenu;
 
     // Constructor of GamePanel Class
     public GamePanel()
@@ -47,6 +48,13 @@ public class GamePanel extends JPanel implements ActionListener {
         resetButton.setSize(120,40);
         resetButton.setLocation(10, 10);
         resetButton.addActionListener(this);
+
+        // main menu button
+        mainMenu = new JButton();
+        mainMenu.setText("MAIN MENU");
+        mainMenu.setSize(140,40);
+        mainMenu.setLocation(200, 10);
+        mainMenu.addActionListener(this);
 
     }
 
@@ -107,7 +115,7 @@ public class GamePanel extends JPanel implements ActionListener {
             g.setColor(Color.red);
             Font ft = new Font("Ink free", Font.BOLD, 20);
             g.setFont(ft);
-            g.drawString("" + applesEaten , 675, 20);
+            g.drawString("" + applesEaten , 670, 20);
         }
         else{
             gameOver(g);
@@ -240,6 +248,7 @@ public class GamePanel extends JPanel implements ActionListener {
         c.drawString("OVERALL SCORE: " + applesEaten, 170, 450);
 
         this.add(resetButton);
+        this.add(mainMenu);
     }
 
 
@@ -250,33 +259,31 @@ public class GamePanel extends JPanel implements ActionListener {
             move();
             checkApple();
             checkCollisions();
-
-
         }
         else{
             if(e.getSource() == resetButton){
 
                 timer.stop();
                 running = false;
-
-
-               // MainMenu mm = new MainMenu();
-                // mm.runMainMenu();
                 //System.exit(0); -- Terminate your program completely
-
-
-
                 GameFrame gh = MainMenu.gf;
                 gh.dispose();
                 GameFrame gf2 = new GameFrame();
-
-
-
             }
-
+            else if(e.getSource() == mainMenu){
+                timer.stop();
+                running = false;
+                GameFrame gh = MainMenu.gf;
+                gh.dispose();
+                MainMenu mm = new MainMenu();
+                mm.runMainMenu();
+            }
         }
         repaint(); // if not running
+    }
 
+    public int getApplesEaten(){
+        return applesEaten;
     }
 
 

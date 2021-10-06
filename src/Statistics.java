@@ -8,6 +8,7 @@ public class Statistics {
     private JFrame frame1;
     private JLabel textLabel;
     private JButton button1;
+    private GamePanel game;
 
     public void showStatistics(){
 
@@ -23,6 +24,7 @@ public class Statistics {
         frame1 = new JFrame();
         textLabel = new JLabel();
         button1 = new JButton();
+        //game = new GamePanel();
 
         frame1.setSize(700, 650);
         frame1.setLocation(xLoc,yLoc);
@@ -31,6 +33,18 @@ public class Statistics {
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLayout(null);
 
+
+        // TEXT LABEL
+       // textLabel.setText("1. " + game.getApplesEaten());
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        textLabel.setVerticalAlignment(SwingConstants.CENTER);
+        textLabel.setSize(400,50);
+        textLabel.setOpaque(true);
+        textLabel.setBackground(Color.white);
+
+        textLabel.setLocation(150,100);
+
+        frame1.add(textLabel);
 
 
         button1.setText("BACK");
@@ -48,6 +62,7 @@ public class Statistics {
                 mm1.runMainMenu();
             }
         });
+
 
 
 
