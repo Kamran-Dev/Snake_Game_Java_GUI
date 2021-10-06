@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main;
+
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
@@ -34,18 +36,18 @@ public class GamePanel extends JPanel implements ActionListener {
     {
         random = new Random();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.setBackground(Color.black);
+        this.setBackground(Color.orange);
         this.setFocusable(true);
         this.addKeyListener(new MyKeyAdapter());
         startGame();
 
         // reset button
         resetButton = new JButton();
-        resetButton.setText("RESET");
-        resetButton.setSize(75,30);
+        resetButton.setText("NEW GAME");
+        resetButton.setSize(120,40);
         resetButton.setLocation(10, 10);
         resetButton.addActionListener(this);
-        this.add(resetButton);
+
     }
 
 
@@ -91,24 +93,21 @@ public class GamePanel extends JPanel implements ActionListener {
             for (int i = 0; i < bodyPartsOfSnake; i++) {
                 if (i == 0) // head of our snake
                 {
-                    //g.setColor(Color.green);
-                    //g.drawRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                     g.setColor(Color.RED); // head of the snake
-                    g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE); // head of the snake
+                    // changing colors
                     //g.setColor(new Color( random.nextInt(255),random.nextInt(255),random.nextInt(255)));
-                    //g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 } else // body part of snake
                 {
-                    g.setColor(Color.blue);
-                    g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    g.setColor(Color.BLACK);
+                    g.fillOval(x[i], y[i],UNIT_SIZE, UNIT_SIZE);
                 }
 
             }
-            //g.setColor(Color.red);
             g.setColor(Color.red);
             Font ft = new Font("Ink free", Font.BOLD, 20);
             g.setFont(ft);
-            g.drawString("SCORE: " + applesEaten , 550, 50);
+            g.drawString("" + applesEaten , 675, 20);
         }
         else{
             gameOver(g);
@@ -232,7 +231,7 @@ public class GamePanel extends JPanel implements ActionListener {
         c.setColor(Color.red);
         Font ft = new Font("Ink free", Font.BOLD, 75);
         c.setFont(ft);
-        c.drawString("GAME OVER :(", 150, 350);
+        c.drawString("GAME OVER ", 150, 350);
 
         // score text
         c.setColor(Color.red);
@@ -260,20 +259,18 @@ public class GamePanel extends JPanel implements ActionListener {
                 timer.stop();
                 running = false;
 
-                //timer.start();
-                //running = true;
-                // startGame();
-                //newApple();
-                //running = true; // game is running
-                //timer = new Timer(DELAY, this);
-                //timer.start();
-                //startGame();
 
-                //GamePanel pn = new GamePanel();
-                //pn.startGame();
-                //this.add(pn);
+               // MainMenu mm = new MainMenu();
+                // mm.runMainMenu();
+                //System.exit(0); -- Terminate your program completely
 
-                GameFrame gf = new GameFrame();
+
+
+                GameFrame gh = MainMenu.gf;
+                gh.dispose();
+                GameFrame gf2 = new GameFrame();
+
+
 
             }
 
@@ -318,24 +315,16 @@ public class GamePanel extends JPanel implements ActionListener {
                         direction = 'D';
                     }
                     break;
-                case KeyEvent.VK_ENTER:
-
-                    timer.stop();
-                    running = false;
-                    //newApple();
-                    //running = true; // game is running
-                    //timer = new Timer(DELAY, this);
-                    //timer.start();
-                    //GamePanel panel = new GamePanel();
-                    //startGame();
-                   //GameFrame gf = new GameFrame();
+                case KeyEvent.VK_SPACE:  // pause and resume the game
+                    if(running){
+                        timer.stop();
+                        running = false;
+                    }
+                    else if(!running){
+                        running = true;
+                        timer.restart();
+                    }
                     break;
-                case KeyEvent.VK_ESCAPE:
-                    running = true;
-                    timer.restart();
-                    break;
-
-
             }
         }
     }

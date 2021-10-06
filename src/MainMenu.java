@@ -23,6 +23,9 @@ public class MainMenu {
     JPanel panel2;
     JPanel panel3;
     JPanel panel4;
+    static GameFrame gf;
+
+
 
 
     public void runMainMenu()  {
@@ -110,7 +113,7 @@ public class MainMenu {
                 if(e.getSource() == buttonStart){
                     buttonClickSound();
                     frame1.dispose();
-                    GameFrame gf = new GameFrame();
+                    gf = new GameFrame();
                 }
             }
         });
@@ -230,9 +233,5 @@ public class MainMenu {
             ex.printStackTrace();
         }
     }
-
-
-
-
 
 }

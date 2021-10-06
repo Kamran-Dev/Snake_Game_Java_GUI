@@ -97,7 +97,7 @@ public class About {
 
 
         // TEXT LABEL
-        textLabel.setText("This game developed by Kamran Rashidov. Date: 01.09.2021");
+        textLabel.setText("This game developed by Rashidov Kamran. Date: 01.09.2021");
         textLabel.setSize(400,50);
         textLabel.setOpaque(true);
         textLabel.setBackground(Color.white);
